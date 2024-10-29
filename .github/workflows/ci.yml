@@ -100,13 +100,9 @@ jobs:
       - name: Package plugin
         id: package-plugin
         run: |
-          ls
-          cd dist
-          ls
-          npx @grafana/sign-plugin@latest --rootUrls https://example.com/grafana
-          cd ..
           mv dist ${{ steps.metadata.outputs.plugin-id }}
-
+          cd ${{ steps.metadata.outputs.plugin-id }}
+          npx @grafana/sign-plugin@latest --rootUrls https://example.com/grafana
           zip ${{ steps.metadata.outputs.archive }} ${{ steps.metadata.outputs.plugin-id }} -r
           
 
