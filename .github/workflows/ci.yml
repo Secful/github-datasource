@@ -100,9 +100,11 @@ jobs:
       - name: Package plugin
         id: package-plugin
         run: |
+          ls
           mv dist ${{ steps.metadata.outputs.plugin-id }}
-          zip ${{ steps.metadata.outputs.archive }} ${{ steps.metadata.outputs.plugin-id }} -r
           npx @grafana/sign-plugin@latest --rootUrls https://example.com/grafana
+          zip ${{ steps.metadata.outputs.archive }} ${{ steps.metadata.outputs.plugin-id }} -r
+          
 
       - name: Archive Build
         uses: actions/upload-artifact@v4
