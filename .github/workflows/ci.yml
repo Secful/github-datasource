@@ -80,9 +80,10 @@ jobs:
             echo "has-e2e=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Sign plugin
-        run: yarn run sign
-        if: ${{ env.GRAFANA_ACCESS_POLICY_TOKEN != '' }}
+      - name: Sign private plugin
+        run: |
+          export GRAFANA_ACCESS_POLICY_TOKEN=${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }}
+          npx @grafana/sign-plugin@latest --rootUrls https://devtoolssalt.grafana.net --distDir dist 
 
       - name: Get plugin metadata
         id: metadata
@@ -96,11 +97,7 @@ jobs:
           echo "plugin-id=${GRAFANA_PLUGIN_ID}" >> $GITHUB_OUTPUT
           echo "plugin-version=${GRAFANA_PLUGIN_VERSION}" >> $GITHUB_OUTPUT
           echo "archive=${GRAFANA_PLUGIN_ARTIFACT}" >> $GITHUB_OUTPUT
-
-      - name: Sign private plugin
-        run: |
-          export GRAFANA_ACCESS_POLICY_TOKEN=${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }}
-          npx @grafana/sign-plugin@latest --rootUrls https://devtoolssalt.grafana.net --distDir dist          
+         
 
       - name: Package plugin
         id: package-plugin
