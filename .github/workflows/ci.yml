@@ -100,7 +100,7 @@ jobs:
       - name: Sign private plugin
         run: |
           export GRAFANA_ACCESS_POLICY_TOKEN=${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }}
-          npx @grafana/sign-plugin@latest --rootUrls https://example.com/grafana --distDir dist          
+          npx @grafana/sign-plugin@latest --rootUrls https://devtoolssalt.grafana.net --distDir dist          
 
       - name: Package plugin
         id: package-plugin
