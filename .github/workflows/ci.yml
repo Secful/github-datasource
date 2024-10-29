@@ -83,7 +83,7 @@ jobs:
       - name: Sign private plugin
         run: |
           export GRAFANA_ACCESS_POLICY_TOKEN=${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }}
-          npx @grafana/sign-plugin@latest --rootUrls https://devtoolssalt.grafana.net,http://localhost,https://internal-monitoring-tools-a.secured-api.com --distDir dist 
+          npx @grafana/sign-plugin@latest --rootUrls https://devtoolssalt.grafana.net,http://localhost:3000,https://internal-monitoring-tools-a.secured-api.com --distDir dist 
 
       - name: Get plugin metadata
         id: metadata
